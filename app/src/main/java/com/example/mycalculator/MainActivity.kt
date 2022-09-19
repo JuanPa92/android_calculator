@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+    //Comment for git changes
     fun onDigit(view: View){
         Toast.makeText(this, "Button click", Toast.LENGTH_SHORT).show()
     }
