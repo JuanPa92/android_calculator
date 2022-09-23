@@ -21,21 +21,42 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Comment for git changes new
-    fun onDigit(view: View){
+    fun onDigit(view: View) {
         tvInput?.append((view as Button).text)
         lastNumeric = true
         lastDot = false
     }
 
-    fun onClear(view: View){
+    fun onClear(view: View) {
         tvInput?.text = ""
     }
 
     fun onDecimalPoint(view: View) {
-        if (lastNumeric && !lastDot){
+        if (lastNumeric && !lastDot) {
             tvInput?.append((view as Button).text)
             lastNumeric = false
             lastDot = true
+        }
+    }
+
+    fun onOperator(view: View){
+        tvInput?.text?.let {
+            if (lastNumeric && !isOperatorAdded(it.toString())){
+                tvInput?.append((view as Button).text)
+                lastNumeric = false
+                lastDot = false
+            }
+        }
+    }
+
+    private fun isOperatorAdded(operatorString: String): Boolean {
+        return if (operatorString.startsWith("-")) {
+            false
+        } else {
+            operatorString.contains("+") ||
+                    operatorString.contains("-") ||
+                    operatorString.contains("*") ||
+                    operatorString.contains("/")
         }
     }
 }
