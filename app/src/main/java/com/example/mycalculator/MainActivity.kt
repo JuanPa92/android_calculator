@@ -59,4 +59,33 @@ class MainActivity : AppCompatActivity() {
                     operatorString.contains("/")
         }
     }
+
+    fun onEqual(view: View){
+        if (lastNumeric){
+            var tvValue = tvInput?.text.toString()
+            var prefix = ""
+
+            try {
+                if( tvValue.startsWith("-")){
+                    prefix = "-"
+                    tvValue = tvValue.substring(1)
+                }
+                if (tvValue.contains("-")){
+                    val splitValue = tvValue.split("-")
+
+                    var firstOperator = splitValue[0]
+                    var secondOperator = splitValue[1]
+
+                    if (prefix.isNotEmpty()){
+                        firstOperator = prefix + firstOperator
+                    }
+
+                    tvInput?.text = (firstOperator.toDouble() - secondOperator.toDouble()).toString()
+                }
+
+            } catch (e: ArithmeticException){
+                e.printStackTrace()
+            }
+        }
+    }
 }
